@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Repeather, Image to pattern generator">
+
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" 
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
+    crossorigin="anonymous" />
+
+
+    <title>Repeather - Patterns</title>
+</head>
+<body>
+    <header>
+        <!-- <h1>REPEATHER</h1> -->
+        <img class="logo" src="./logo.PNG" alt="logo">
+        <p>Image to Pattern generator</p>
+    </header>
+    <main class="container">
+        <canvas id="canvas"></canvas>
+        <div class="input-wrapper">
+            <label for="uploader">Select an image:</label><br>
+            <input type="file" accept="image/png, image/jpeg" id="uploader" />
+        </div>
+        <div class="pattern-container">
+        </div>
+    </main>
+    <footer>
+        <article>
+            <p> 
+                <a href="https://github.com/heyitstay11/" aria-label="Link to my Github Account" rel="noreferrer noopener"  target="_blank" >
+                    <i aria-hidden="true" class="fab fa-github tooltip" data-text="Github"></i>
+                </a>
+                <a href="https://twitter.com/hey_its_tay11" aria-label="Link to my Twitter Account" rel="noreferrer noopener" target="_blank">
+                    <i aria-hidden="true" class="fab fa-twitter-square tooltip" data-text="Twitter" ></i>
+                </a>
+            </p>
+            <p>Created by <a class="highlight" href="https://github.com/heyitstay11/" rel="noreferrer noopener"  target="_blank" >Tayyab</a></p>
+        </article>
+    </footer>
+    <script src="./app.js"></script>
+</body>
+</html>
