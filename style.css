@@ -41,6 +41,17 @@ input[type="file" i]{
     margin: 0.25rem;
     background-color: whitesmoke;
 }
+.message{
+    text-align: center;
+    margin-bottom: .8rem;
+}
+.message > p{
+    display: inline-block;
+    background-color: whitesmoke;
+    padding: 4px 8px;
+    font-size: 1.1rem;
+    border-radius: 4px;
+}
 .container{
     max-width: 1100px;
     margin: .3rem auto;
@@ -62,7 +73,7 @@ input[type="file" i]{
 .pattern > img{
     max-width: 90vw;
 } 
-.download-btn{
+.download-btn, #generate{
     display: inline-block;
     text-decoration: none;
     font-family: inherit;
@@ -134,6 +145,10 @@ margin: .6rem .4rem;
     color: aqua;
 }
 
+.message > .red{
+    color: rgb(179, 0, 0);
+    font-size: 1.25rem;
+}
 @media (max-width: 768px) {
     #canvas{
        max-width: 96% !important;
