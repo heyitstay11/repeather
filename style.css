@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 body{
+    position: relative;
     min-height: 100vh;
     font-family: sans-serif;
     background: #007991;  /* fallback for old browsers */
@@ -36,6 +37,9 @@ header p{
     letter-spacing: 1px;
     margin-bottom: .4rem;
 }
+input[type="file"]{
+    max-width: 96%;
+}
 input[type="file" i]{
     font-size: 1.1rem;
     margin: 0.25rem;
@@ -51,6 +55,11 @@ input[type="file" i]{
     padding: 4px 8px;
     font-size: 1.1rem;
     border-radius: 4px;
+    line-height: 1.4;
+}
+.message > .red{
+    color: rgb(179, 0, 0);
+    font-size: 1.25rem;
 }
 .container{
     max-width: 1100px;
@@ -72,8 +81,11 @@ input[type="file" i]{
 }
 .pattern > img{
     max-width: 90vw;
+    position: relative;
+    cursor: pointer;
 } 
-.download-btn, #generate{
+
+.download-btn, .custom{
     display: inline-block;
     text-decoration: none;
     font-family: inherit;
@@ -144,13 +156,122 @@ margin: .6rem .4rem;
     text-decoration: none;
     color: aqua;
 }
-
-.message > .red{
-    color: rgb(179, 0, 0);
-    font-size: 1.25rem;
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    pointer-events: none;
+    opacity: 0;
+    transition: all .2s ease;
+    z-index: 1;
 }
+.modal.open{
+    opacity: 1;
+    pointer-events: all;
+}
+.modal > .preview {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    max-height: 85%;
+    max-width: 90%;
+}
+.popup-form{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .2s ease;
+    z-index: 1;
+}
+.popup-form.open{
+    opacity: 1;
+    pointer-events: all;
+}
+.popup-form > .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 400px;
+    max-width: 94%;
+    padding: .5rem 1rem;
+    border-radius: 8px;
+}
+.content > .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .7rem;
+}
+.title > h2{
+    text-align: center;
+    flex: 1;
+}
+.title > .close{
+    font-size: 1.5rem;
+    color: red;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+}
+.label-container > input[type="radio"]{
+    display: none;
+}
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: .8rem .5rem;
+}
+.group p {
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+.label-container  > label{
+    display: inline-block;
+    margin: 0 .3rem;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    transition: all .2s ease;
+    padding: 3px 5px;
+}
+.label-container > label:hover{
+    background-color: rgb(0, 230, 230);
+    color: white;
+}
+.label-container  > input[type="radio"]:checked + label{
+    background-color: rgb(0, 230, 230);
+    color: #2b2b2b;
+    border-radius: 4px;
+}
+
+.jt-around{
+    justify-content: space-around;
+}
+
 @media (max-width: 768px) {
     #canvas{
        max-width: 96% !important;
+    }
+    .modal > .preview {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 500px;
+        max-height: 60%;
+        max-width: 90%;
     }
 }

@@ -17,6 +17,43 @@
     <title>Repeather - Patterns</title>
 </head>
 <body>
+    <figure class="modal">
+        <img class="preview" src="" alt="preview">
+    </figure>
+    <article class="popup-form">
+        <div class="content">
+            <div class="title">
+                <h2>Customize</h2>
+                <p class="close">X</p>
+            </div>
+        <form id="cForm">
+            <div class="group jt-around">
+                <p>Format</p>
+                <div class="label-container .jt-around">
+                    <input type="radio" name="format" id="5" value="5" checked>
+                    <label for="5">5x5</label>
+                    <input type="radio" name="format" id="4" value="4">
+                    <label for="4">4x4</label>
+                    <input type="radio" name="format" id="3" value="3">
+                    <label for="3">3x3</label>
+                    <input type="radio" name="format" id="2" value="2">
+                    <label for="2">2x2</label>
+                </div>
+            </div>
+            <div class="group jt-around">
+                <p>Quality(px)</p>
+                <p class="quality">200</p>
+               <input type="range" name="range" min="200" value="200" max="1000"></input>
+            </div>
+            <div class="group">
+                <button id="create" class="custom">Create</button>
+                <div class="output-info">
+                    <p>Output resolution: 1000 X 1000</p>
+                </div>
+            </div>
+        </form>
+        </div>
+    </article>
     <header>
         <!-- <h1>REPEATHER</h1> -->
         <img class="logo" src="./logo.PNG" alt="logo">
@@ -27,7 +64,7 @@
         <div class="input-wrapper">
             <label for="uploader">Select an image:</label><br>
             <input type="file" accept="image/png, image/jpeg" id="uploader" />
-            <button id="generate">Generate</button>
+            <button id="custom" class="custom">Customize</button>
         </div>
         <div class="message"></div>
         <div class="pattern-container">

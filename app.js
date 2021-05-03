@@ -1,10 +1,15 @@
 
 const canvas = document.getElementById('canvas');
     uploader = document.getElementById('uploader');
-    generateBtn = document.getElementById('generate');
+    customBtn = document.getElementById('custom');
+    cForm = document.getElementById('cForm');
     context = canvas.getContext('2d');
     patternContainer = document.querySelector('.pattern-container');
     message = document.querySelector('.message');
+    modal = document.querySelector('.modal');
+    previewImage = document.querySelector('.preview');
+    closeBtn = document.querySelector('.close');
+    popupForm = document.querySelector('.popup-form');
     reader = new FileReader(); 
     image = new Image();
 
@@ -30,7 +35,8 @@ const uploadImage = (e) =>{
            context.drawImage(image, 0, 0);
            
            let msg = `<p>Input image: width = ${image.width}px, height = ${image.height}px</p>`
-           message.innerHTML = msg;
+          
+           generatePattern();
        }
 
     }
@@ -38,6 +44,25 @@ const uploadImage = (e) =>{
 }
 
 let previousSrc = null;
+
+const checkAndGenerate = () => {
+    
+    if(!image.src){
+        let msg = `<p class="red" >No Images Selected!</p>`
+        message.innerHTML = msg;
+        return;
+    }
+    if(image.src === previousSrc){
+        let msg = `<p class="red">Select New Image</p>`
+        message.innerHTML = msg;
+        return;
+    }
+
+    generatePattern();
+
+    previousSrc = image.src;
+
+}
 
 const generatePattern = () => {
     
@@ -52,8 +77,7 @@ const generatePattern = () => {
             return;
         }
    
-
-   previousSrc = image.src;
+  
    
 
    // Temporary Canvas to draw the output image 
@@ -89,16 +113,62 @@ addImage(dataUrl);
 
 
 uploader.addEventListener('change', uploadImage);
-generateBtn.addEventListener('click', generatePattern)
 
 
+
+
+const closeForm = () => {
+    popupForm.classList.remove('open');
+}
+customBtn.addEventListener('click', () => {
+    popupForm.classList.add('open');
+});
+closeBtn.addEventListener('click', closeForm);
+
+const updateForm = () => {
+    let format =  cForm.querySelector('input[name="format"]:checked').value;
+    let quality = cForm.querySelector('input[type="range"]').value;
+    let output = cForm.querySelector('.output-info');
+    output.innerHTML = ` <p>Output resolution: ${format * quality} X ${format * quality} </p>`;
+    cForm.querySelector('.quality').textContent = quality;
+   
+}
+
+const handleCustom = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+}
+
+cForm.addEventListener('input', updateForm);
+cForm.addEventListener('submit', handleCustom);
+
+
+// Closing the modal
+modal.addEventListener('click', (e) => {
+    if(e.target.classList.contains('modal')){
+        modal.classList.remove('open');
+    }
+})
+
+const openModal = (e) => {
+    let source = e.target.src;
+    modal.classList.add('open');
+    previewImage.src = source;
+}
 
 const addImage = (dataUrl) => {
-
-    let pattern = ` <figure class="pattern">
-                        <img src="${dataUrl}" alt="pattern" height="340" >
-                        <figcaption> <a class="download-btn" href="${dataUrl}" download="pattern.png" >Download</a> </figcaption>
-                    </figure>
-                    ` 
+    let pattern = 
+    `<figure class="pattern">
+        <img class="image" src="${dataUrl}" alt="pattern" height="340" onclick="openModal(event)" >
+            <figcaption> <a class="download-btn" href="${dataUrl}" download="pattern.png" >Download</a> </figcaption>
+    </figure>
+     ` 
     patternContainer.innerHTML = pattern + patternContainer.innerHTML;
+
+    let msg = `<p>
+        Input image: width = ${image.width}px, height = ${image.height}px<br/>
+        Click on Images to Preview
+            </p>`
+
+    message.innerHTML = msg;
 }
