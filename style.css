@@ -48,6 +48,7 @@ input[type="file" i]{
 .message{
     text-align: center;
     margin-bottom: .8rem;
+    max-width: 98%;
 }
 .message > p{
     display: inline-block;

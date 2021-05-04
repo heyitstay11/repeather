@@ -43,54 +43,31 @@ const uploadImage = (e) =>{
 
 }
 
-let previousSrc = null;
-
-const checkAndGenerate = () => {
-    
-    if(!image.src){
-        let msg = `<p class="red" >No Images Selected!</p>`
-        message.innerHTML = msg;
-        return;
-    }
-    if(image.src === previousSrc){
-        let msg = `<p class="red">Select New Image</p>`
-        message.innerHTML = msg;
-        return;
-    }
-
-    generatePattern();
-
-    previousSrc = image.src;
+const checkAndGenerate = (format = 5, quality = 200) => {
+   
+    generatePattern(format, quality);
 
 }
 
-const generatePattern = () => {
+const generatePattern = (format = 5, quality = 200) => {
     
         if(!image.src){
             let msg = `<p class="red" >No Images Selected!</p>`
             message.innerHTML = msg;
             return;
         }
-        if(image.src === previousSrc){
-            let msg = `<p class="red">Select New Image</p>`
-            message.innerHTML = msg;
-            return;
-        }
-   
   
-   
-
    // Temporary Canvas to draw the output image 
 let tempCanvas =  document.createElement('canvas');
     tempContext = tempCanvas.getContext('2d');
-    tempCanvas.height = tempCanvas.width = 1000; 
+    tempCanvas.height = tempCanvas.width = (format * quality); 
 
 
     // MiniCanvas to store the print 
 let miniCanvas = document.createElement('canvas');
     miniContext = miniCanvas.getContext('2d');
 
-    miniCanvas.height = miniCanvas.width = 200;
+    miniCanvas.height = miniCanvas.width = (quality);
     
     // Draw a single print
     miniContext.drawImage(image, 0, 0, miniCanvas.width, miniCanvas.height)
@@ -121,9 +98,15 @@ const closeForm = () => {
     popupForm.classList.remove('open');
 }
 customBtn.addEventListener('click', () => {
+    if(!image.src){
+        let msg = `<p class="red" >No Images Selected!</p>`
+        message.innerHTML = msg;
+        return;
+    }
     popupForm.classList.add('open');
 });
 closeBtn.addEventListener('click', closeForm);
+
 
 const updateForm = () => {
     let format =  cForm.querySelector('input[name="format"]:checked').value;
@@ -136,7 +119,11 @@ const updateForm = () => {
 
 const handleCustom = (e) => {
     e.preventDefault();
-    console.log(e.target);
+    let format =  cForm.querySelector('input[name="format"]:checked').value;
+    let quality = cForm.querySelector('input[type="range"]').value;
+    
+    checkAndGenerate(format, quality);
+    closeForm();
 }
 
 cForm.addEventListener('input', updateForm);
