@@ -24,17 +24,13 @@ const uploadImage = (e) =>{
        image.src = reader.result;   //  Pass Data URI in Image element
 
        image.onload = () => {
-          // console.log(image);
+        
            // set Canvas width and height according to Image
-          // let width = Math.min(image.width, 500);
-         //  let height = Math.min(image.height, 1000);
            canvas.width = image.width;
            canvas.height = image.height;
            
            // Draw
            context.drawImage(image, 0, 0);
-           
-           let msg = `<p>Input image: width = ${image.width}px, height = ${image.height}px</p>`
           
            generatePattern();
        }
