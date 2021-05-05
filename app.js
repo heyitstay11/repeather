@@ -2,7 +2,6 @@
 const canvas = document.getElementById('canvas');
     uploader = document.getElementById('uploader');
     customBtn = document.getElementById('custom');
-    cForm = document.getElementById('cForm');
     context = canvas.getContext('2d');
     patternContainer = document.querySelector('.pattern-container');
     message = document.querySelector('.message');
@@ -12,6 +11,10 @@ const canvas = document.getElementById('canvas');
     popupForm = document.querySelector('.popup-form');
     reader = new FileReader(); 
     image = new Image();
+    cForm = document.getElementById('cForm');
+    let format =  cForm.querySelector('input[name="format"]:checked').value;
+    let quality = cForm.querySelector('input[type="range"]').value;
+    let output = cForm.querySelector('.output-info');
 
 
 const uploadImage = (e) =>{
@@ -36,12 +39,6 @@ const uploadImage = (e) =>{
        }
 
     }
-
-}
-
-const checkAndGenerate = (format = 5, quality = 200) => {
-   
-    generatePattern(format, quality);
 
 }
 
@@ -93,6 +90,7 @@ uploader.addEventListener('change', uploadImage);
 const closeForm = () => {
     popupForm.classList.remove('open');
 }
+
 customBtn.addEventListener('click', () => {
     if(!image.src){
         let msg = `<p class="red" >No Images Selected!</p>`
@@ -105,9 +103,9 @@ closeBtn.addEventListener('click', closeForm);
 
 
 const updateForm = () => {
-    let format =  cForm.querySelector('input[name="format"]:checked').value;
-    let quality = cForm.querySelector('input[type="range"]').value;
-    let output = cForm.querySelector('.output-info');
+    format =  cForm.querySelector('input[name="format"]:checked').value;
+    quality = cForm.querySelector('input[type="range"]').value;
+    output = cForm.querySelector('.output-info');
     output.innerHTML = ` <p>Output resolution: ${format * quality} X ${format * quality} </p>`;
     cForm.querySelector('.quality').textContent = quality;
    
@@ -118,7 +116,7 @@ const handleCustom = (e) => {
     let format =  cForm.querySelector('input[name="format"]:checked').value;
     let quality = cForm.querySelector('input[type="range"]').value;
     
-    checkAndGenerate(format, quality);
+    generatePattern(format, quality);
     closeForm();
 }
 
@@ -146,7 +144,7 @@ const addImage = (dataUrl) => {
             <figcaption> <a class="download-btn" href="${dataUrl}" download="pattern.png" >Download</a> </figcaption>
     </figure>
      ` 
-    patternContainer.innerHTML = pattern + patternContainer.innerHTML;
+    patternContainer.innerHTML = pattern + patternContainer.innerHTML; // Add to Start
 
     let msg = `<p>
         Input image: width = ${image.width}px, height = ${image.height}px<br/>
